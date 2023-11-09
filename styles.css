@@ -1,8 +1,68 @@
-/*
+.setting-item.definition-text-box
+{
+    border-top: none;
+    padding: 0.3em 0 0.75em;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.setting-item.definition-text-box .setting-item-info .setting-item-name
+{
+    transform: translateY(-20px);
+}
 
-If your plugin does not need CSS, delete this file.
+.setting-item.definition-text-box .setting-item-control textarea
+{
+    width: 350px;
+    height: 60px;
+    resize: none;
+}
 
-*/
+.setting-item.word-text-box .setting-item-control input
+{
+    width: 350px;
+}
+
+.positionless
+{
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.setting-format-sample-text
+{
+    color: rgb(166, 138, 249);
+    font-weight: 600;
+    position: relative;
+    height: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
+    right: -210px;
+    top: -15px;
+}
+
+.setting-item.setting-format-sample-text-container .setting-item-info .setting-item-description
+{
+    padding-bottom: 17px;
+    height: 33px;
+}
+
+.formatted-label
+{
+    font-style: italic;
+    color: var(--text-faint);
+    font-size:13px;
+}
+
+.formatted-text
+{
+    color: var(--text-muted); 
+    font-size: 14px; 
+    font-weight: 600; 
+    padding-bottom: 20px;
+}
+
+.formatted-bottom-text
+{
+    position: relative; 
+    top: -8px;
+}
