@@ -2,10 +2,10 @@
 
 This is a plugin that makes creating word cards easier. You can easily create and insert them. You store each item in your Word Bank to retrieve them easily. You can make your own dictionary.
 
-[Adding Word](#adding-word)
-[Additional](#additional)
-[Using Template](#using-template)
-[Template Tags](#template-tags)
+[Adding Word](#adding-word) <br>
+[Additional](#additional) <br>
+[Using Template](#using-template) <br>
+[Template Tags](#template-tags) <br>
 
 ---
 ## Adding Word
