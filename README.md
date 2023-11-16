@@ -1,96 +1,85 @@
-# Obsidian Sample Plugin
+# Word Bank
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+This is a plugin that makes creating word cards easier. You can easily create and insert them. You store each item in your Word Bank to retrieve them easily. You can make your own dictionary.
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+[Adding Word](#adding-word) <br>
+[Additional](#additional) <br>
+[Using Template](#using-template) <br>
+[Template Tags](#template-tags) <br>
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+---
+## Adding Word
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+First choose your Word Bank directory. (You must use a folder inside your vault.)
 
-## First time developing plugins?
+![](https://github.com/TannYuld/WordBank/blob/master/source/img1.png)
 
-Quick starting guide for new plugin devs:
+<br>
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+<br>
 
-## Releasing new releases
+Then you can add your very first word to your bank.
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+![](https://github.com/TannYuld/WordBank/blob/master/source/img2.png)
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+type your definition and word...
 
-## Adding your plugin to the community plugin list
+![](https://github.com/TannYuld/WordBank/blob/master/source/img3.png)
 
-- Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+</br>
 
-## How to use
+</br>
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+Now you can insert your word into your file via Insert Word command.
 
-## Manually installing the plugin
+![](https://github.com/TannYuld/WordBank/blob/master/source/img4.png)
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+With that you can preview this link via ctrl+mouse hover
 
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
+![](https://github.com/TannYuld/WordBank/blob/master/source/img5.png)
 
-## Funding URL
+---
 
-You can include funding URLs where people who use your plugin can financially support it.
+## Additional
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+You can additionaly add extra information such as;
 
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
+Date, time
 
-If you have multiple URLs, you can also do:
+![](https://github.com/TannYuld/WordBank/blob/master/source/img6.png)
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
+or tag of your choice.
 
-## API Documentation
+![](https://github.com/TannYuld/WordBank/blob/master/source/img7.png)
 
-See https://github.com/obsidianmd/obsidian-api
+As a choice you can also create your own word template if you don't like defualt one.
+
+---
+
+## Using Template
+
+First you need to choose your template file.
+
+![](https://github.com/TannYuld/WordBank/blob/master/source/img8.png)
+
+Which looks like this with template tags.
+
+![](https://github.com/TannYuld/WordBank/blob/master/source/img9.png)
+
+When you re-create word 'dolor' you get this result.
+
+![](https://github.com/TannYuld/WordBank/blob/master/source/img10.png)
+
+---
+
+#### Template tags
+
+`{{word}}` Display word
+
+`{{definition}}` Display definition for the word
+
+`{{date}}` Display current date
+
+`{{time}}` Display current time
+
+`{{tag}}` Display tag
