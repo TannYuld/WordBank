@@ -1,6 +1,6 @@
 import { TFile, Notice, App, EditorPosition, TAbstractFile, ViewState } from "obsidian";
 import { Settings } from "src/settings";
-import { getDefualtContent } from "src/util/default-word-page";
+import { getDefaultContent } from "src/util/default-word-page";
 import { isSettings, parseText } from "src/util/methodes";
 import { WordInfo } from "src/word-info";
 import { WordFile } from "./word-file";
@@ -35,7 +35,7 @@ export class WordHandler
 
 			if(!template || template == undefined)
 			{
-				const initialContent = getDefualtContent(definition, 
+				const initialContent = getDefaultContent(definition, 
 					(this.settings.addDateInFile) ? info.date : '', 
 					(this.settings.addTimeInFile) ? info.time : '', 
 					(this.settings.addTagInFile) ? info.tag : '');
@@ -143,30 +143,35 @@ export class WordHandler
 	async addNewWord(word:string, definition:string)
 	{
 		if(this.settings.wordBankLocation.length > 0){
-			if(this.settings.useCustomWordTemplate){
-				if(this.settings.customTemplateLocation.length > 0){
-					let templateFile;
-					this.app.vault.getMarkdownFiles().forEach(file=>{
-						if(file.path == this.settings.customTemplateLocation+".md")
+			if(this.bankContainsWord(word)){
+				new Notice(`There is already a word like ${word}`);
+			}else
+			{
+				if(this.settings.useCustomWordTemplate){
+					if(this.settings.customTemplateLocation.length > 0){
+						let templateFile;
+						this.app.vault.getMarkdownFiles().forEach(file=>{
+							if(file.path == this.settings.customTemplateLocation+".md")
+							{
+								templateFile = file;
+								return;
+							}
+						});
+	
+						if(templateFile){
+							this.makeWord(word, definition, templateFile);
+						}else
 						{
-							templateFile = file;
-							return;
+							new Notice("Template file could not be found!")
 						}
-					});
-
-					if(templateFile){
-						this.makeWord(word, definition, templateFile);
 					}else
 					{
-						new Notice("Template file could not be found!")
+						new Notice("Template file is empty. You can set it in settings.");
 					}
 				}else
 				{
-					new Notice("Template file is empty. You can set it in settings.");
+					this.makeWord(word, definition);
 				}
-			}else
-			{
-				this.makeWord(word, definition);
 			}
 		}else
 		{
@@ -181,13 +186,14 @@ export class WordHandler
 		if(activeEditor)
 		{
             let cursor = activeEditor.editor?.getCursor();
+			const linkText = this.getWordLink(file);
 
             if(cursor)
             {
                 const preSpace = (activeEditor.editor?.getLine(cursor.line).charAt(cursor.ch-1) == " ") ? "" : " ";
-                activeEditor.editor?.replaceRange(`${preSpace}[[${file.name}]]`, cursor);
+                activeEditor.editor?.replaceRange(`${preSpace}[[${linkText}]]`, cursor);
 
-                activeEditor.editor?.setCursor(activeEditor.editor.getCursor().line, activeEditor.editor.getCursor().ch+(`${preSpace}[[${file.name}]]`.length));
+                activeEditor.editor?.setCursor(activeEditor.editor.getCursor().line, activeEditor.editor.getCursor().ch+(`${preSpace}[[${linkText}]]`.length));
 
                 cursor = activeEditor.editor?.getCursor();
                 if(cursor)
@@ -199,5 +205,39 @@ export class WordHandler
                 }
             }
 		}
+	}
+
+	private getWordLink(fileToLink:TFile):string
+	{
+		let result = fileToLink.basename;
+
+		let containsWordWithSameName = false;
+		console.log(fileToLink);
+		this.app.vault.getMarkdownFiles().forEach(file => {
+			console.log(file);
+			if(file.basename == fileToLink.basename && file.path !== fileToLink.path)
+			{
+				containsWordWithSameName = true;
+			}
+		});
+		
+		if(containsWordWithSameName)
+		{
+			result = fileToLink.path.slice(0,-3);
+		}
+
+		return result;
+	}
+
+	private bankContainsWord(baseName:string):boolean
+	{
+		let result = false;
+		this.app.vault.getMarkdownFiles().forEach(file=>{
+			if(baseName === file.basename && file.path.contains(this.settings.wordBankLocation))
+			{
+				result = true;
+			}
+		});
+		return result;
 	}
 }

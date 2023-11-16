@@ -21,7 +21,7 @@ export class SettingModal extends PluginSettingTab{
 		};
 		
 		new Setting(containerEl)
-			.setName("Open created Words")
+			.setName("Open created words")
 			.setDesc("Opens created words after their creation.")
 			.addToggle(toggle => toggle
 				.setValue(this.plugin.settings.openWords)
@@ -36,7 +36,7 @@ export class SettingModal extends PluginSettingTab{
 		if(this.plugin.settings.openWords)
 		{
 			new Setting(containerEl)
-			.setName("Open created Words in new tab")
+			.setName("Open created words in new tab")
 			.setDesc("Opens created words in new tab.")
 			.addToggle(toggle => toggle
 				.setValue(this.plugin.settings.openWordsNewPage)
@@ -57,7 +57,7 @@ export class SettingModal extends PluginSettingTab{
 		}));
 		
 		new Setting(containerEl)
-			.setName("Add Date into word files")
+			.setName("Add date into word files")
 			.setDesc("Puts current date above the word file in wordbank.")
 			.addToggle(toggle => toggle
 				.setValue(this.plugin.settings.addDateInFile)

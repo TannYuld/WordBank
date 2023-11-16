@@ -1,4 +1,4 @@
-export function getDefualtContent(definition:string, date?:string, time?:string, tag?:string):string
+export function getDefaultContent(definition:string, date?:string, time?:string, tag?:string):string
 {
     let content:string = "";
     

@@ -15,19 +15,9 @@ export default class MyPlugin extends Plugin {
 		await this.loadSettings();
 		this.wordHandler = WordHandler.getInstance(this.app, this.settings);
 
-		this.registerEvent(this.app.vault.on('create', (file) => {
-			if(file.path.contains(this.settings.wordBankLocation))
-			{
-				console.log("A new word file created");
-			}
-		  }));
-
-		  this.registerEvent(this.app.vault.on('delete', (file) => {
-			if(file.path.contains(this.settings.wordBankLocation))
-			{
-				console.log("A word file destroyed");
-			}
-		  }));
+		this.app.vault.getMarkdownFiles().forEach(element => {
+			console.log(element);
+		});
 
 		this.addRibbonIcon("landmark", "Word Bank", (event) => 
 		{
@@ -62,21 +52,10 @@ export default class MyPlugin extends Plugin {
 		id: 'add-word-into-wordbank',
 		name: 'Add word into wordbank',
 		
-		checkCallback: (checking: boolean) => {
-		  const currentEditor = this.app.workspace.activeEditor;
-
-		  if(currentEditor)
-		  {
-			if(!checking)
-			{
-				new WordAddingModal(this.app, this.settings,(wordToAdd, definition)=>{
-					this.wordHandler.addNewWord(wordToAdd, definition);
-				}).open();
-			}
-
-			return true;
-		  }
-		  return false;
+		callback: () => {
+			new WordAddingModal(this.app, this.settings,(wordToAdd, definition)=>{
+				this.wordHandler.addNewWord(wordToAdd, definition);
+			}).open();
 		},
 		});
 
@@ -84,12 +63,10 @@ export default class MyPlugin extends Plugin {
 			id: 'insert-word',
 			name: 'Insert word',
 
-			checkCallback: (checking: boolean) => {
-				const currentEditor = this.app.workspace.activeEditor;
-
-				if(currentEditor)
+			editorCallback: (editor, view) => {
+				if(editor)
 		  		{
-					if(!checking)
+					if(view)
 					{
 						new WordChoosingModal(this.app, this.settings, file => {
 							this.wordHandler.insertWordLink(file);
@@ -108,7 +85,6 @@ export default class MyPlugin extends Plugin {
 
 			callback: () => {
 				new WordChoosingModal(this.app, this.settings, file => {
-
 					this.wordHandler.openWord(file, true);
 				}).open();
 			}

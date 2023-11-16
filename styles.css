@@ -66,3 +66,9 @@
     position: relative; 
     top: -8px;
 }
+
+.nav-file-tag
+{
+    display:inline-block;
+    vertical-align:middle
+}

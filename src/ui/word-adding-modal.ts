@@ -46,7 +46,6 @@ export class WordAddingModal extends Modal {
 					.setButtonText("Add")
 					.setCta()
 					.onClick(() => {
-						console.log(`Recived word: ${this.wordToAdd}  Recived deifinition: ${this.defToAdd}`);
 						this.onSubmit(this.wordToAdd, this.defToAdd);
 						this.close();
 					})

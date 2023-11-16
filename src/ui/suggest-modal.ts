@@ -1,6 +1,6 @@
 /*
 *   Original code by Liam Cain.
-*   https://github.com/mirnovov
+*   https://github.com/liamcain
 */
 
 import { AbstractInputSuggest, TFile, TAbstractFile, Notice, TFolder, Vault} from "obsidian";
@@ -64,13 +64,10 @@ export class FileSuggest extends AbstractInputSuggest<TFile> {
 		if (file.extension == "md") {
 			el.setText(trimFile(file));
 		}
-		else {
-			el.setText(file.path.slice(0, -7))
-			el.insertAdjacentHTML(
-				"beforeend", 
-				`<div class="nav-file-tag" style="display:inline-block;vertical-align:middle">canvas</div>`
-			);
-		}
+		// else {
+		// 	el.setText(file.path.slice(0, -7));
+		// 	el.createDiv({cls:"nav-file-tag", text:"canvas"});
+		// }
 	}
 
 	selectSuggestion(file: TFile) {
