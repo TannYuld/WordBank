@@ -15,10 +15,6 @@ export default class MyPlugin extends Plugin {
 		await this.loadSettings();
 		this.wordHandler = WordHandler.getInstance(this.app, this.settings);
 
-		this.app.vault.getMarkdownFiles().forEach(element => {
-			console.log(element);
-		});
-
 		this.addRibbonIcon("landmark", "Word Bank", (event) => 
 		{
 			const menu = new Menu();

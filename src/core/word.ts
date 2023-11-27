@@ -212,9 +212,7 @@ export class WordHandler
 		let result = fileToLink.basename;
 
 		let containsWordWithSameName = false;
-		console.log(fileToLink);
 		this.app.vault.getMarkdownFiles().forEach(file => {
-			console.log(file);
 			if(file.basename == fileToLink.basename && file.path !== fileToLink.path)
 			{
 				containsWordWithSameName = true;
